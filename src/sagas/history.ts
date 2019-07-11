@@ -28,6 +28,8 @@ function* getHistory() {
 
     yield put(actions.getHistorySuccess(history))
 
+    // update
+    yield put(actions.getHistory(false))
   } catch (e) {
     yield put(actions.getHistoryError())
     console.log('ERROR', e)

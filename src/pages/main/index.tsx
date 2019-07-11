@@ -8,7 +8,7 @@ import { Container } from './styles'
 interface IProps {
   items: HistoryItem[],
   error: boolean,
-  getHistory: () => void
+  getHistory: (loader: boolean) => void
 }
 
 const enhance = connect(
@@ -20,7 +20,7 @@ const Main = (props: IProps) => {
   const { getHistory } = props
 
   useEffect(() => {
-    getHistory()
+    getHistory(true)
   }, [])
 
   return (

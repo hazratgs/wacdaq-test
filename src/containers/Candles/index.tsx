@@ -15,7 +15,7 @@ interface IProps {
   items: HistoryItem[],
   error: boolean,
   loader: boolean,
-  getHistory: () => void
+  getHistory: (loader: boolean) => void
 }
 
 const enhance = connect(
@@ -44,7 +44,7 @@ const Candles = (props: IProps) => {
     <Container>
       <Symbol>{symbol}</Symbol>
       {loader && <Loader />}
-      {error && <ErrorMessage handle={getHistory}/>}
+      {error && <ErrorMessage handle={getHistory.bind(null, true)}/>}
       {!!items.length && (
         <HighchartsReact
           highcharts={Highcharts}

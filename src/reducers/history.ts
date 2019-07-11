@@ -13,9 +13,9 @@ const initialState: IHistoryState = {
 
 const reducer = createReducer<typeof initialState>({}, initialState)
 
-reducer.on(actions.getHistory, (state) => ({
+reducer.on(actions.getHistory, (state, payload: boolean) => ({
   ...state,
-  loader: true,
+  loader: payload,
   error: false
 }))
 
