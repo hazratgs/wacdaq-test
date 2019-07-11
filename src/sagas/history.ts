@@ -1,7 +1,7 @@
 import { takeLatest, put, call, select } from 'redux-saga/effects'
 import * as actions from '../actions/history'
 import axios from 'axios'
-import { HistoryItem, IFetchPatams } from '../types/history'
+import { HistoryItem, VolumeItem, IFetchPatams } from '../types/history'
 import State from '../types/state'
 
 const fetchHistory = ({ symbol, resolution, from, to }: IFetchPatams) =>
@@ -25,8 +25,10 @@ function* getHistory() {
     if (s !== 'ok') throw new Error(`status ${s}`)
 
     const history: HistoryItem[] = t.map((timestamp: number, i: number) => [timestamp * 1000, o[i], h[i], l[i], c[i]])
+    const volume: VolumeItem[] = t.map((timestamp: number, i: number) => [timestamp * 1000, v[i]])
 
     yield put(actions.getHistorySuccess(history))
+    yield put(actions.getVolumeSuccess(volume))
 
     // update
     yield put(actions.getHistory(false))

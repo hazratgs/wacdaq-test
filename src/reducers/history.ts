@@ -1,6 +1,6 @@
 import { createReducer } from 'redux-act'
 import * as actions from '../actions/history'
-import { IHistoryState, HistoryItem } from '../types/history'
+import { IHistoryState, HistoryItem, VolumeItem } from '../types/history'
 
 const initialState: IHistoryState = {
   symbol: 'ETH/BTC',
@@ -38,7 +38,7 @@ reducer.on(actions.getHistoryError, (state) => ({
   error: true
 }))
 
-reducer.on(actions.getVolumeSuccess, (state, payload: number[]) => ({
+reducer.on(actions.getVolumeSuccess, (state, payload: VolumeItem[]) => ({
   ...state,
   volume: payload
 }))

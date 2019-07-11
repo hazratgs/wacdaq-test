@@ -2,7 +2,7 @@ export interface IHistoryState {
   symbol: string,
   from: number,
   items: HistoryItem[],
-  volume: number[],
+  volume: VolumeItem[],
   error: boolean,
   loader: boolean
 }
@@ -15,3 +15,5 @@ export interface IFetchPatams {
 }
 
 export type HistoryItem = Array<number[]>
+
+export type VolumeItem = Array<number[]>

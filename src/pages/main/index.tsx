@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { getHistory } from '../../actions/history'
 import { HistoryItem } from '../../types/history'
 import Candles from '../../containers/Candles'
+import Chart from '../../containers/Chart'
 import { Container } from './styles'
 
 interface IProps {
@@ -26,6 +27,7 @@ const Main = (props: IProps) => {
   return (
     <Container>
       <Candles />
+      <Chart />
     </Container>
   )
 }
