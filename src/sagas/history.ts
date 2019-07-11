@@ -16,7 +16,7 @@ function* getHistory() {
       symbol,
       from,
       resolution: 15,
-      to: Date.now() / 1000
+      to: +(Date.now() / 1000).toFixed(0)
     }
 
     const response = yield call(fetchHistory, params)
