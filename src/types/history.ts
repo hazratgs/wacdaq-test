@@ -1,14 +1,10 @@
 export interface IHistoryState {
-  items: IHistoryItem[]
-}
-
-export interface IHistoryItem {
-  timestamp: number
-  open: number
-  close: number
-  high: number
-  low: number
-  volume: number
+  symbol: string,
+  from: number,
+  items: HistoryItem[],
+  volume: number[],
+  error: boolean,
+  loader: boolean
 }
 
 export interface IFetchPatams {
@@ -17,3 +13,5 @@ export interface IFetchPatams {
   from: number
   to: number
 }
+
+export type HistoryItem = Array<number[]>

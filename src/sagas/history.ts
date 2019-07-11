@@ -1,26 +1,35 @@
-import { takeLatest, put, call } from 'redux-saga/effects'
+import { takeLatest, put, call, select } from 'redux-saga/effects'
 import * as actions from '../actions/history'
 import axios from 'axios'
-import { IHistoryItem, IFetchPatams } from '../types/history'
+import { HistoryItem, IFetchPatams } from '../types/history'
+import State from '../types/state'
 
 const fetchHistory = ({ symbol, resolution, from, to }: IFetchPatams) =>
   axios.get(`/plot/history?symbol=${symbol}&resolution=${resolution}&from=${from}&to=${to}`)
 
 function* getHistory() {
   try {
+    const state: State = yield select()
+    const { symbol, from } = state.history
+
     const params: IFetchPatams = {
-      symbol: 'ETH/BTC',
+      symbol,
+      from,
       resolution: 15,
-      from: 1546462800,
       to: Date.now() / 1000
     }
 
     const response = yield call(fetchHistory, params)
-    const history = response.data
+    const { s, t, c, o, h, l, v } = response.data
 
-    window.console.log(history)
+    if (s !== 'ok') throw new Error(`status ${s}`)
+
+    const history: HistoryItem[] = t.map((timestamp: number, i: number) => [timestamp * 1000, o[i], h[i], l[i], c[i]])
+
+    yield put(actions.getHistorySuccess(history))
 
   } catch (e) {
+    yield put(actions.getHistoryError())
     console.log('ERROR', e)
   }
 }

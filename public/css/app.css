@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap');
+
+html, body {
+  padding: 0;
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', Arial, sans-serif
+}
+
+.highcharts-point-down {
+  fill: #ff7d7d!important;
+}
+
+.highcharts-point-up {
+  fill: #c4ffd3!important;
+}
