@@ -1,7 +1,4 @@
 const options = {
-  chart: {
-    alignTicks: false
-  },
   rangeSelector: {
     selected: 1,
     buttons: [{
